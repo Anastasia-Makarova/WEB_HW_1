@@ -1,10 +1,10 @@
 import os
 import shlex
 from pathlib import Path
-from Optima.Address_book import AddressBook, Record, DuplicatedPhoneError
-from Optima.Notes import Note, NotesList
-from Optima.Folder_sorter import sort_folders_and_return_result
-from Optima.find_command import get_command
+from Address_book import AddressBook, Record, DuplicatedPhoneError
+from Notes import Note, NotesList
+from Folder_sorter import Create_txt_report, sort_folder
+from find_command import get_command
 
 root_path: Path = None
 records: AddressBook = None
@@ -234,10 +234,11 @@ def sort_notes_by_tag_count_handler():
         return "No notes to sort."
 
 @input_error("path")
-def sort_files_handler(*args):
+def sort_files_handler(*args) -> str:
     folder_path = args[0]
-    result = sort_folders_and_return_result(folder_path, root_path)
-    return result
+    sort_folder(folder_path)
+    result = Create_txt_report(folder_path)
+    return result.create_report(folder_path)
 
 
 COMMANDS = {

@@ -1,6 +1,35 @@
+from abc import ABC, abstractmethod
 import re
 import shutil
 from pathlib import Path
+
+
+class Report(ABC):
+    @abstractmethod
+    def create_report(self, path: str):
+        pass
+
+
+class Create_txt_report:
+    def __init__(self, path: str) -> None:
+        self._path = path
+
+
+    def create_report(self, path: str) -> str:
+        path = Path(path)
+        result = ""
+        for k, v in dict_of_categories_files.items():
+            result += f'{k.upper():^100}\n{v}\n'
+
+        result += f'known_formats={known_formats}\nother_formats={other_formats}\n'
+
+        
+        report_filename = path.joinpath("sorting_report.txt")
+        with open(str(report_filename), "w", encoding="utf-8") as report_file:
+            report_file.write(result)
+
+        return f"Folder '{path}' sorted successfully. See report file: '{report_filename.absolute()}'."
+
 
 
 CATEGORIES = {'images':['.jpeg', '.png', '.jpg', '.svg'],
@@ -105,23 +134,10 @@ def sort_folders(path:Path) -> None:
             removing_folders(i.parent)
 
 
-def sort_folders_and_return_result(path: str, report_path: Path) -> str:
+def sort_folder(path: str) -> str:
     global root_path
     root_path = Path(path)
     if not root_path.exists():
         return f"The specified folder {path} does not exist."
     create_translation_dict()
     sort_folders(Path(path))
-
-    result = ""
-    for k, v in dict_of_categories_files.items():
-        result += f'{k.upper():^100}\n{v}\n'
-
-    result += f'known_formats={known_formats}\nother_formats={other_formats}\n'
-
-    
-    report_filename = report_path.joinpath("sorting_report.txt")
-    with open(str(report_filename), "w", encoding="utf-8") as report_file:
-        report_file.write(result)
-
-    return f"Folder '{path}' sorted successfully. See report file: '{report_filename.absolute()}'."
