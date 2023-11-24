@@ -1,0 +1,79 @@
+Supported bot commands:
+
+add contact [name] [phone-1] [phone-2] ... [phone-n]
+ - Adds new contact record with name and phone number/numbers
+
+delete contact [name]
+ - Deletes contact by name
+
+delete contact [name] [phone-1] [phone-2] ... [phone-n]
+ - Deletes phone numbers for contact
+
+edit contact [name] [old phone] [new phone]
+ - Changes phone number for contact
+
+phone [name]
+ - Shows phone numbers for contact
+
+address [name]
+- Shows contact's address
+
+address [name] ["address"]
+ - Adds address for contact. Wrap address with double quotes
+
+birthday [name]
+- Shows number of days till the contact's next birthday
+
+birthday [name] [date]
+ - Adds birthday for contact. Format for date: DD-MM-YYYY
+
+email [name]
+- Shows contact's email
+
+email [name] [email]
+ - Adds email for contact. Format for email: example@email.com
+
+search contacts [query]
+ - Searches for contacts by partial match of name or phone 
+
+show contacts
+ - Prints all contacts info with pagination
+
+show birthdays [days]
+ - Prints contacts having birthday within following number of days
+
+add note ["title"] ["text"]
+ - Adds a new note with a title and text. Wrap title and text with double quotes
+
+delete note ["title"]
+ - Deletes the note with the specified title. Wrap title and text with double quotes
+
+delete note [number]
+ - Deletes the note with the specified number. Hint: use 'show notes' to see numbers
+
+edit note ["old title"] ["new title"] ["new text"]
+ - Edits a note by its old title, changing it to a new title and text. Wrap titles and text with double quotes
+
+edit note [number] ["new title"] ["new text"]
+ - Edits a note by its number, changing it to a new title and text. Hint: use 'show notes' to see numbers
+
+search note ["query"]
+ - Searches for notes by a query in the text or title. Wrap query with double quotes
+
+search note tag [tag]
+ - Searches for notes by a tag
+
+show notes
+ - Prints all saved notes in a table format
+
+sort tag
+ - Sorts notes by the number of tags from the most to the least
+
+sort files [path]
+ - Sorts files in the target folder by type, unpacks archives, deletes empty folders. Saves result of sorting to the report file
+
+good bye
+close
+exit
+stop
+ - Stops work and exits bot
