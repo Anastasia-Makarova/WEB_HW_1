@@ -11,10 +11,10 @@ from find_command import get_command
 class InputOutput (ABC):
 
     def __init__(self, text: str) -> None:
-        self._text = text
+        self.__text = text
 
     def __str__(self) -> str:
-        return str(self._text)
+        return str(self.__text)
 
     @abstractmethod
     def user_input(self, text: str):
@@ -24,16 +24,17 @@ class InputOutput (ABC):
     def output(self, text: str):
         pass
 
+
 class Console(InputOutput):
     def __init__(self, text: str) -> None:
-        self.text = text
+        super().__init__(text)
 
     def user_input(self, text: str):
         pass
-        
+
     def output(self, text):
         text = str(text)
-        print(self.text)
+        print(text)
 
 
 
@@ -201,7 +202,7 @@ def search_contacts_handler(*args):
 
 @input_error([])
 def show_contacts_handler(*args):
-    print("{:<10} {:<40} {:<35} {:<15} {:<60}".format("name", "phones", "email", "birthday", "address"))
+    Console.output("{:<10} {:<40} {:<35} {:<15} {:<60}".format("name", "phones", "email", "birthday", "address"))
     return records.iterator()
 
 @input_error("days")
@@ -317,7 +318,7 @@ def main():
     notes_list = NotesList(root_path)        
     with AddressBook(str(root_path.joinpath("address_book.bin"))) as book:
         os.system('cls' if os.name == 'nt' else 'clear')    
-        print("\33[92m" + f"Wake up {os.getlogin().title()}...")
+        print(f"Wake up {os.getlogin().title()}...")
         print("The OPTIMA has you...")
         print("Follow the 'help' command.")
 
@@ -326,7 +327,7 @@ def main():
             user_input = input(">>> ")
 
             if user_input in EXIT_COMMANDS:
-                print("Good bye!")
+                Console.output("Good bye!")
                 break
             
             func, data = parser(user_input)
@@ -334,13 +335,13 @@ def main():
             result = func(*data)
             
             if isinstance(result, str):
-                print(result)
+                Console.output(result)
             else:
                 for i in result:                
-                    print("\n".join(i))
+                    Console.output("\n".join(i))
                     input("Press enter to show more records")
 
-        print ("\033[0m")
+        Console.output ("\033[0m")
 
 
 if __name__ == "__main__":
