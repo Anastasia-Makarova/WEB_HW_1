@@ -1,4 +1,3 @@
-from abc import ABC
 import re
 import pickle
 from pathlib import Path
@@ -10,7 +9,7 @@ from collections import UserDict
 class DuplicatedPhoneError(Exception):
     ...
 
-class Field(ABC):
+class Field():
     def __init__(self, value: str):
         self.__value = value
 
@@ -213,8 +212,7 @@ class AddressBook(UserDict):
         with open(self.__file_name, "wb") as fh:
             pickle.dump(self.data, fh)
         if exception_type:
-            print(f"There was an error during execution: {exception_type.__name__} = {exception_value}")
-            print("\033[0m")
+            return(f"There was an error during execution: {exception_type.__name__} = {exception_value}")
         return True
     
     def search_contacts(self, term) -> list:

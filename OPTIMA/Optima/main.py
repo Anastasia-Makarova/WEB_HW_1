@@ -8,6 +8,32 @@ from Folder_sorter import Create_txt_report, sort_folder
 from find_command import get_command
 
 
+class InputOutput (ABC):
+
+    def __init__(self, text: str) -> None:
+        self._text = text
+
+    def __str__(self) -> str:
+        return str(self._text)
+
+    @abstractmethod
+    def user_input(self, text: str):
+        pass
+
+    @abstractmethod
+    def output(self, text: str):
+        pass
+
+class Console(InputOutput):
+    def __init__(self, text: str) -> None:
+        self.text = text
+
+    def user_input(self, text: str):
+        pass
+        
+    def output(self, text):
+        text = str(text)
+        print(self.text)
 
 
 

@@ -1,10 +1,7 @@
 import re
 import pickle
-from abc import ABC, abstractmethod
 from pathlib import Path
 from collections import UserList
-
-
 
 
 class Note:
