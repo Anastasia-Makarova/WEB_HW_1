@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from Address_book import AddressBook, Record, DuplicatedPhoneError
 from Notes import Note, NotesList
 from Folder_sorter import Create_txt_report, sort_folder
-from find_command import get_command
+from find_command import InputOutput, get_command
 
 
 class InputOutput (ABC):

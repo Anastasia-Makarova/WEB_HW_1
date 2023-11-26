@@ -1,4 +1,33 @@
 import re
+from abc import ABC, abstractmethod
+
+class InputOutput (ABC):
+
+    def __init__(self, text: str) -> None:
+        self.__text = text
+
+    def __str__(self) -> str:
+        return str(self.__text)
+
+    @abstractmethod
+    def user_input(self, text: str):
+        pass
+
+    @abstractmethod
+    def output(self, text: str):
+        pass
+
+
+class Console(InputOutput):
+
+    @classmethod
+    def user_input(self, text: str):
+        pass
+    
+    @classmethod
+    def output(self, text):
+        text = str(text)
+        print(text)
 
 
 '''Виправляємо введений рядок. Чистимо від всіх символів, окрім літер. 
@@ -74,10 +103,10 @@ def find_one_command(processed_input, commands):
 '''Додатковий інпут для уточення, якщо більше одного співпадіння'''
 def choose_command(processed_input):
     dict_of_possible_commands ={}
-    print ('Did you mean one of the following commands?')
+    Console.output('Did you mean one of the following commands?')
     for k, v in enumerate(processed_input):
         dict_of_possible_commands[k+1] = v
-        print(k + 1, v)    
+        Console.output(f"{k + 1} {v}")    
     new_input = input(f'Choose number of command or press any key to continue: ')
     try:
         new_input = int(new_input)
