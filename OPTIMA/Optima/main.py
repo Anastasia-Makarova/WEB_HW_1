@@ -26,12 +26,12 @@ class InputOutput (ABC):
 
 
 class Console(InputOutput):
-    def __init__(self, text: str) -> None:
-        super().__init__(text)
 
+    @classmethod
     def user_input(self, text: str):
         pass
-
+    
+    @classmethod
     def output(self, text):
         text = str(text)
         print(text)
