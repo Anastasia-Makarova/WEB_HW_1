@@ -17,7 +17,7 @@ class InputOutput (ABC):
         return str(self.__text)
 
     @abstractmethod
-    def user_input(self, text: str):
+    def kbd_input(self, text: str):
         pass
 
     @abstractmethod
@@ -28,8 +28,10 @@ class InputOutput (ABC):
 class Console(InputOutput):
 
     @classmethod
-    def user_input(self, text: str):
-        pass
+    def kbd_input(self, text: str):
+        user_input = input(text)
+        return user_input
+
     
     @classmethod
     def output(self, text):
@@ -324,7 +326,7 @@ def main():
 
         records = book
         while True:
-            user_input = input(">>> ")
+            user_input = Console.kbd_input(">>> ")
 
             if user_input in EXIT_COMMANDS:
                 Console.output("Good bye!")
@@ -339,7 +341,7 @@ def main():
             else:
                 for i in result:                
                     Console.output("\n".join(i))
-                    input("Press enter to show more records")
+                    Console.kbd_input("Press enter to show more records")
 
         Console.output ("\033[0m")
 

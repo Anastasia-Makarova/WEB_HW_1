@@ -10,7 +10,7 @@ class InputOutput (ABC):
         return str(self.__text)
 
     @abstractmethod
-    def user_input(self, text: str):
+    def kbd_input(self, text: str):
         pass
 
     @abstractmethod
@@ -21,8 +21,9 @@ class InputOutput (ABC):
 class Console(InputOutput):
 
     @classmethod
-    def user_input(self, text: str):
-        pass
+    def kbd_input(self, text: str):
+        user_input = input(text)
+        return user_input
     
     @classmethod
     def output(self, text):
@@ -92,7 +93,7 @@ def two_dimensional(pure_input, len_of_input, commands):
 
 '''Додатковий інпут для уточення, якщо знайдено одне співпадіння'''
 def find_one_command(processed_input, commands):
-    new_input = input(f'Did you mean command: <{processed_input}> ? Y/N: ')
+    new_input = Console.kbd_input(f'Did you mean command: <{processed_input}> ? Y/N: ')
     if new_input.lower() == 'Y'.lower():
         for command in commands:
             if processed_input in command:
@@ -107,7 +108,7 @@ def choose_command(processed_input):
     for k, v in enumerate(processed_input):
         dict_of_possible_commands[k+1] = v
         Console.output(f"{k + 1} {v}")    
-    new_input = input(f'Choose number of command or press any key to continue: ')
+    new_input = Console.kbd_input(f'Choose number of command or press any key to continue: ')
     try:
         new_input = int(new_input)
         if new_input in dict_of_possible_commands:
